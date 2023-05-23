@@ -1,0 +1,12 @@
+Results for maxconnection=0 test:
+dnseed and listen were automatically set to zero as expected
+bc getpeerinfo returned an empty list as expected
+
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -connect or -maxconnections=0 set -> setting -dnsseed=0
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -connect or -maxconnections=0 set -> setting -listen=02023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -listen=0 -> setting -upnp=0
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -listen=0 -> setting -natpmp=0
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -listen=0 -> setting -discover=0
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -listen=0 -> setting -listenonion=0
+2023-05-23T00:43:33Z InitParameterInteraction: parameter interaction: -listen=0 -> setting -i2pacceptincoming=0
+
+

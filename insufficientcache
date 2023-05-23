@@ -1,0 +1,17 @@
+I ran this test first at checklevel=1 with no error.  When I changed to checklevel=3 I got the expected error due to insufficient dbcache:
+
+2023-05-23T03:31:50Z Verifying last 144080 blocks at level 3
+2023-05-23T03:31:50Z Verification progress: 0%
+2023-05-23T03:31:52Z Verification progress: 10%
+2023-05-23T03:31:54Z Verification progress: 20%
+2023-05-23T03:31:58Z Verification progress: 30%
+2023-05-23T03:32:01Z Verification progress: 40%
+2023-05-23T03:32:05Z VerifyDB(): block verification stopping at height 75911 (no data). This could be due to pruning or use of an assumeutxo snapshot.
+2023-05-23T03:32:05Z Skipped verification of level >=3 (insufficient database cache size). Consider increasing -dbcache.
+2023-05-23T03:32:05Z Verification: No coin database inconsistencies in last 68169 blocks (95574 transactions)
+2023-05-23T03:32:05Z Error: Insufficient dbcache for block verification
+Error: Insufficient dbcache for block verification
+2023-05-23T03:32:05Z Shutdown: In progress...
+2023-05-23T03:32:05Z scheduler thread exit
+2023-05-23T03:32:05Z Shutdown: done
+

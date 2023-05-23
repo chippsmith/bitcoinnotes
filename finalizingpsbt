@@ -1,0 +1,9 @@
+ I created a test wallet and imoprted the test descriptor from https://github.com/bitcoin-core/bitcoin-devwiki/wiki/25.0-Release-Candidate-Testing-Guide#4-reset-testing-environment.
+
+I created an address from this descriptor. I generated a block reward to this address and mined 100 block to mature the output.
+
+I used the output to create a psbt to a new address.
+
+I then used walletprocesspsbt to append the inputs.
+
+After running finalizepsbt i got the rawtransaction and was able to use sendrawtransaction, generate 1 block and getblock to see the transaction included in a block.

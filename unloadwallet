@@ -1,0 +1,7 @@
+I imported the descriptor from the test and while it was importing i ran the unload command on the wallet and as expected I got an error:
+
+user@pop-os:~/Projects/bitcointesting$ bcli unloadwallet test-wallet
+error code: -18
+error message:
+Requested wallet does not exist or is not loaded
+

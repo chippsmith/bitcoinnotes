@@ -1,0 +1,4 @@
+I ran verify chain with 1 as the first parameter meaning verifying the validity of blocks and 0 as the second parameter meaning all the blocks from genesis to tip.  Running this command  on a pruned node gave the expected output:
+
+user@pop-os:~$ bcli verifychain 1 0
+false

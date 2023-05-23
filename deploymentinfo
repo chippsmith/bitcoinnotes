@@ -1,0 +1,51 @@
+I ran this test and it yeilded the expected results:
+
+user@pop-os:~$  curl localhost:38332/rest/deploymentinfo.json | json_pp
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   540  100   540    0     0   853k      0 --:--:-- --:--:-- --:--:--  527k
+{
+   "deployments" : {
+      "bip34" : {
+         "active" : true,
+         "height" : 1,
+         "type" : "buried"
+      },
+      "bip65" : {
+         "active" : true,
+         "height" : 1,
+         "type" : "buried"
+      },
+      "bip66" : {
+         "active" : true,
+         "height" : 1,
+         "type" : "buried"
+      },
+      "csv" : {
+         "active" : true,
+         "height" : 1,
+         "type" : "buried"
+      },
+      "segwit" : {
+         "active" : true,
+         "height" : 1,
+         "type" : "buried"
+      },
+      "taproot" : {
+         "active" : true,
+         "bip9" : {
+            "min_activation_height" : 0,
+            "since" : 0,
+            "start_time" : -1,
+            "status" : "active",
+            "status_next" : "active",
+            "timeout" : 9223372036854775807
+         },
+         "height" : 0,
+         "type" : "bip9"
+      }
+   },
+   "hash" : "00000008819873e925422c1ff0f99f7cc9bbb232af63a077a480a3633bee1ef6",
+   "height" : 0
+}
+

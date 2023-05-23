@@ -1,0 +1,4 @@
+The command:
+$ bcli -named listunspent query_options='{ "include_immature_coinbase":true }'
+
+gave the expected result.  Showing the immature coinbase transaction.  But why does it list spendable as true

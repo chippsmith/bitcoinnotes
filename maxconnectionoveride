@@ -1,0 +1,94 @@
+logs for maxconnection=0 dnsseed=1 listen=1
+
+Appears to have overwritten the default setting and querie the dns server and is listening but wont connect tto peer. getpeerinfo still returns an empty list as expected.
+
+2023-05-23T00:54:13Z Bitcoin Core version v25.0.0rc2 (release build)
+2023-05-23T00:54:13Z Signet derived magic (message start): 0a03cf40
+2023-05-23T00:54:13Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2023-05-23T00:54:13Z Using RdSeed as an additional entropy source
+2023-05-23T00:54:13Z Using RdRand as an additional entropy source
+2023-05-23T00:54:13Z Default data directory /home/user/.bitcoin
+2023-05-23T00:54:13Z Using data directory /tmp/25-rc-test/signet
+2023-05-23T00:54:13Z Config file: /tmp/25-rc-test/bitcoin.conf
+2023-05-23T00:54:13Z Config file arg: dnsseed="1"
+2023-05-23T00:54:13Z Config file arg: listen="1"
+2023-05-23T00:54:13Z Config file arg: maxconnections="0"
+2023-05-23T00:54:13Z Config file arg: signet="1"
+2023-05-23T00:54:13Z Command-line arg: datadir="/tmp/25-rc-test"
+2023-05-23T00:54:13Z Using at most 0 automatic connections (1024 file descriptors available)
+2023-05-23T00:54:13Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2023-05-23T00:54:13Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2023-05-23T00:54:13Z Script verification uses 11 additional threads
+2023-05-23T00:54:13Z scheduler thread start
+2023-05-23T00:54:13Z Binding RPC on address ::1 port 38332
+2023-05-23T00:54:13Z Binding RPC on address 127.0.0.1 port 38332
+2023-05-23T00:54:13Z [http] creating work queue of depth 16
+2023-05-23T00:54:13Z Using random cookie authentication.
+2023-05-23T00:54:13Z Generated RPC authentication cookie /tmp/25-rc-test/signet/.cookie
+2023-05-23T00:54:13Z [http] starting 4 worker threads
+2023-05-23T00:54:13Z Using wallet directory /tmp/25-rc-test/signet/wallets
+2023-05-23T00:54:13Z init message: Verifying wallet(s)…
+2023-05-23T00:54:13Z Using /16 prefix for IP bucketing
+2023-05-23T00:54:13Z init message: Loading P2P addresses…
+2023-05-23T00:54:13Z Creating peers.dat because the file was not found ("/tmp/25-rc-test/signet/peers.dat")
+2023-05-23T00:54:13Z init message: Loading banlist…
+2023-05-23T00:54:13Z Recreating the banlist database
+2023-05-23T00:54:13Z SetNetworkActive: true
+2023-05-23T00:54:13Z Failed to read fee estimates from /tmp/25-rc-test/signet/fee_estimates.dat. Continue anyway.
+2023-05-23T00:54:13Z Cache configuration:
+2023-05-23T00:54:13Z * Using 2.0 MiB for block index database
+2023-05-23T00:54:13Z * Using 8.0 MiB for chain state database
+2023-05-23T00:54:13Z * Using 440.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2023-05-23T00:54:13Z init message: Loading block index…
+2023-05-23T00:54:13Z Assuming ancestors of block 0000004429ef154f7e00b4f6b46bfbe2d2678ecd351d95bbfca437ab9a5b84ec have valid signatures.
+2023-05-23T00:54:13Z Setting nMinimumChainWork=000000000000000000000000000000000000000000000000000001899d8142b0
+2023-05-23T00:54:13Z Opening LevelDB in /tmp/25-rc-test/signet/blocks/index
+2023-05-23T00:54:13Z Opened LevelDB successfully
+2023-05-23T00:54:13Z Using obfuscation key for /tmp/25-rc-test/signet/blocks/index: 0000000000000000
+2023-05-23T00:54:13Z LoadBlockIndexDB: last block file = 0
+2023-05-23T00:54:13Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=0, size=0, heights=0...0, time=1970-01-01...1970-01-01)
+2023-05-23T00:54:13Z Checking all blk files are present...
+2023-05-23T00:54:13Z Initializing databases...
+2023-05-23T00:54:13Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2023-05-23T00:54:13Z Opening LevelDB in /tmp/25-rc-test/signet/chainstate
+2023-05-23T00:54:13Z Opened LevelDB successfully
+2023-05-23T00:54:13Z Wrote new obfuscate key for /tmp/25-rc-test/signet/chainstate: 82fd24d5a1a2a0f2
+2023-05-23T00:54:13Z Using obfuscation key for /tmp/25-rc-test/signet/chainstate: 82fd24d5a1a2a0f2
+2023-05-23T00:54:13Z [snapshot] allocating all cache to the IBD chainstate
+2023-05-23T00:54:13Z Opening LevelDB in /tmp/25-rc-test/signet/chainstate
+2023-05-23T00:54:13Z Opened LevelDB successfully
+2023-05-23T00:54:13Z Using obfuscation key for /tmp/25-rc-test/signet/chainstate: 82fd24d5a1a2a0f2
+2023-05-23T00:54:13Z [Chainstate [ibd] @ height -1 (null)] resized coinsdb cache to 8.0 MiB
+2023-05-23T00:54:13Z [Chainstate [ibd] @ height -1 (null)] resized coinstip cache to 440.0 MiB
+2023-05-23T00:54:13Z init message: Verifying blocks…
+2023-05-23T00:54:13Z  block index              32ms
+2023-05-23T00:54:13Z Setting NODE_NETWORK on non-prune mode
+2023-05-23T00:54:13Z loadblk thread start
+2023-05-23T00:54:13Z UpdateTip: new best=00000008819873e925422c1ff0f99f7cc9bbb232af63a077a480a3633bee1ef6 height=0 version=0x00000001 log2_work=22.206105 tx=1 date='2020-09-01T00:00:00Z' progress=0.000000 cache=0.0MiB(0txo)
+2023-05-23T00:54:13Z Failed to open mempool file from disk. Continuing anyway.
+2023-05-23T00:54:13Z loadblk thread exit
+2023-05-23T00:54:13Z block tree size = 1
+2023-05-23T00:54:13Z nBestHeight = 0
+2023-05-23T00:54:13Z torcontrol thread start
+2023-05-23T00:54:13Z AddLocal([2600:1700:7160:9f39::1aed]:38333,1)
+2023-05-23T00:54:13Z Discover: IPv6 wlp0s20f3: 2600:1700:7160:9f39::1aed
+2023-05-23T00:54:13Z AddLocal([2600:1700:7160:9f39:efec:6a73:e703:390d]:38333,1)
+2023-05-23T00:54:13Z Discover: IPv6 wlp0s20f3: 2600:1700:7160:9f39:efec:6a73:e703:390d
+2023-05-23T00:54:13Z AddLocal([2600:1700:7160:9f39:9ef6:e7c8:36d1:f1b0]:38333,1)
+2023-05-23T00:54:13Z Discover: IPv6 wlp0s20f3: 2600:1700:7160:9f39:9ef6:e7c8:36d1:f1b0
+2023-05-23T00:54:13Z Bound to 127.0.0.1:38334
+2023-05-23T00:54:13Z Bound to [::]:38333
+2023-05-23T00:54:13Z Bound to 0.0.0.0:38333
+2023-05-23T00:54:13Z 0 block-relay-only anchors will be tried for connections.
+2023-05-23T00:54:13Z init message: Starting network threads…
+2023-05-23T00:54:13Z net thread start
+2023-05-23T00:54:13Z dnsseed thread start
+2023-05-23T00:54:13Z Loading addresses from DNS seed v7ajjeirttkbnt32wpy3c6w3emwnfr3fkla7hpxcfokr3ysd3kqtzmqd.onion:38333
+2023-05-23T00:54:13Z addcon thread start
+2023-05-23T00:54:13Z msghand thread start
+2023-05-23T00:54:13Z opencon thread start
+2023-05-23T00:54:13Z init message: Done loading
+2023-05-23T00:54:13Z Loading addresses from DNS seed 178.128.221.177
+2023-05-23T00:54:14Z Loading addresses from DNS seed seed.signet.bitcoin.sprovoost.nl.
+2023-05-23T00:54:14Z 18 addresses found from DNS seeds
+2023-05-23T00:54:14Z dnsseed thread exit

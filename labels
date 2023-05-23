@@ -1,0 +1,1 @@
+This test worked.  I was only able to get a result if I tried send, receive and refund as the argument.  Anything else I tried gave the expected error.

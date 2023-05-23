@@ -1,0 +1,74 @@
+I created a raw transaction with this command:
+Note to self: To create a non-witness transaction of 64 bytes or so, You can generate an OP_RETURN output with the following dummy data in hexadecimal format: 6a00000000.
+
+
+bcli -regtest createrawtransaction '[{"txid":"abcb27f98380b8470b12e58bb709c2341ff98bdde6986d4f554fe72c0f6ef1d7","vout":0}]' '{"data":"6a00000000"}'
+
+The raw transaction was 0200000001d7f16e0f2ce74f554f6d98e6dd8bf91f34c209b78be5120b47b88083f927cbab0000000000fdffffff010000000000000000076a056a0000000000000000.
+
+Decoding the transaction with decoderawtransaction gave the result showing size needed for test:
+{
+  "txid": "0ca5460111229b5db6201fc4c5807fffc8486277a50340d5a8e791be08b562e3",
+  "hash": "0ca5460111229b5db6201fc4c5807fffc8486277a50340d5a8e791be08b562e3",
+  "version": 2,
+  "size": 67,
+  "vsize": 67,
+  "weight": 268,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "abcb27f98380b8470b12e58bb709c2341ff98bdde6986d4f554fe72c0f6ef1d7",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967293
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00000000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_RETURN 6a00000000",
+        "desc": "raw(6a056a00000000)#ekr96fru",
+        "hex": "6a056a00000000",
+        "type": "nulldata"
+      }
+    }
+  ]
+}
+
+I signed the transactoin with signrawtransactionwithwallet and the result was:
+02000000000101d7f16e0f2ce74f554f6d98e6dd8bf91f34c209b78be5120b47b88083f927cbab0000000000fdffffff010000000000000000076a056a00000000024730440220746989681045c9430665ff059132337bbc03ddd54f03974e033e5a8adcaf3717022078626a9a8df5fb60206d1d6413e54e1cfbf7960ac9f1e3d69d48b7e156b7ad0f012102278c16d52822991bf6c30c815d35b5f42d0ffa3e2c27d67d39eab61b80e4ef1500000000
+
+I used send rawtransaction to send the transaction and got the resulting txid:
+0ca5460111229b5db6201fc4c5807fffc8486277a50340d5a8e791be08b562e3
+
+It was in my mempool and after generating a block and using the getblock command the result shows the transaction was confirmed in a block.
+
+{
+  "hash": "4711b95d28480e9cabd1f2e280e800214448761d91e687be145fe08d532dc19a",
+  "confirmations": 1,
+  "height": 222,
+  "version": 805306368,
+  "versionHex": "30000000",
+  "merkleroot": "473e0de69c92d73c0759e83bd513d221b6d47527ab0782214f3422d582523ae3",
+  "time": 1684805657,
+  "mediantime": 1684805367,
+  "nonce": 0,
+  "bits": "207fffff",
+  "difficulty": 4.656542373906925e-10,
+  "chainwork": "00000000000000000000000000000000000000000000000000000000000001be",
+  "nTx": 2,
+  "previousblockhash": "0d1d43e973c6f385c03f7eb5576de34e7ae3eaaf902f7af33933662e3cd0960c",
+  "strippedsize": 281,
+  "size": 426,
+  "weight": 1269,
+  "tx": [
+    "de5db37a5f2198c1cf8f25cebc5fbd3f2a43086735bf4612750a875554606830",
+    "0ca5460111229b5db6201fc4c5807fffc8486277a50340d5a8e791be08b562e3"
+  ]
+}
+
