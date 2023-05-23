@@ -1,0 +1,83 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2577
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\margl1440\margr1440\vieww18900\viewh26940\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs36 \cf0 How did users know whether miners support segwit prior to activation?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b0 \cf0 \
+https://github.com/bitcoin/bips/blob/master/bip-0009.mediawiki\
+\
+Change in semeantics of the version field in bitcoin blocks.  Interpret the version field as a bit vector, each bit tracks an individual change tallied each retarget period\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+This document specifies a proposed change to the semantics of the 'version' field in Bitcoin blocks, allowing multiple backward-compatible changes (further called "soft forks") to be deployed in parallel. It relies on interpreting the version field as a bit vector, where each bit can be used to track an independent change. These are tallied each retarget period. Once the consensus change succeeds or times out, there is a "fallow" pause after which the bit can be reused for later changes. \
+\
+James O\'92B: Oh, you did a presentation on it? Cool, so you guys should have some rough familiarity. The idea is that we\'92ve got this state machine that basically defines the way the deployment goes down on the basis of the version string that miner set when they create blocks. In the specific case of SegWit with BIP9 there was a 95% threshold that needed to be met of blocks created that signaled support \'93yes\'94 for support for SegWit within a given retargeting period. For anybody who\'92s around then and watching Bitcoin, I\'92m sure you had like your favorite site that you go to I think - mine was fork.lol - and you check desperately to see if that threshold was on track to be met and for a long time it wasn\'92t.s
+\f1 \cf0 \kerning1\expnd0\expndtw0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+https://bitcoinops.org/en/topics/soft-fork-activation/\
+\
+\
+
+\f0\b Is a non segwit a full node?\
+
+\f1\b0 \
+https://bitcointalk.org/index.php?topic=2333913.msg23741488#msg23741488\
+\
+https://bitcointalk.org/index.php?topic=5067738.0\
+\
+https://bitcoin.stackexchange.com/questions/98810/whats-the-blocksize-limit-after-segwit-and-how-do-legacy-nodes-deal-with-segwit\
+\
+No because it cannot verify the signatures of segwit transactions because they do not know about the witness data\
+\
+https://bitcoin.org/en/full-node	\
+\
+https://en.bitcoin.it/wiki/Full_node#What_makes_a_full_node.3F\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 The scriptPubKey of the transaction that received the SegWit output contains the Witness Commitment.\'a0 This commitment looks like an "anyone can pay" script to non-SegWit nodes. So it doesn't matter what is in the scriptSig of the transaction that spends the SegWit output. The non-SegWit node will accept it even if the scriptSig contains an invalid signature.\
+\
+So, the transaction looks "valid", but to a non-SegWit node the output doesn't look like it is restricted to being spent only by the intended recipient.\'a0 Then later when it is spent, a SegWit node can look at the witness data and verify that it the spending was properly authorized.\'a0 Meanwhile, a non-SegWit node believes that the transaction is valid even if it is not properly authorized.\
+\
+If you are running a SegWit node then you are not trusting anybody, and you are verifying that the transaction is correct (and as such you are verifying that the block containing the transaction is correct).\'a0 If you are running a non-SegWit node, then you are effectively trusting that the longest chain that you've heard about has been verified by a SegWit node somewhere, since your node won't be able to tell the difference between a valid transaction spending a SegWit output and an invalid transaction spending a SegWit output.
+\f1 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+
+\f0\b Taproot activation\
+
+\f1\b0 \
+https://bitcoinmagazine.com/technical/bip-8-bip-9-or-modern-soft-fork-activation-how-bitcoin-could-upgrade-next\
+\
+https://en.bitcoin.it/wiki/Taproot_activation_proposals\
+\
+https://www.coindesk.com/tech/2021/04/15/taproot-speedy-trial-code-merged-into-bitcoin-core/\
+\
+\
+
+\f0\b How does segwit affect IBD?\
+
+\f1\b0 \
+https://bitcoincore.org/en/2016/01/26/segwit-benefits/#efficiency-gains-when-not-verifying-signatures\
+\
+\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 Efficiency gains when not verifying signatures\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \ulnone Signatures for historical transactions may be less interesting than signatures for future transactions \'96 for example, Bitcoin Core does not check signatures for transactions prior to the most recent checkpoint by default, and some SPV clients simply don\'92t check signatures themselves at all, trusting that has already been done by miners or other nodes. At present, however, signature data is an integral part of the transaction and must be present in order to calculate the transaction hash.\
+Segregating the signature data allows nodes that aren\'92t interested in signature data to prune it from the disk, or to avoid downloading it in the first place, saving resources.\
+}

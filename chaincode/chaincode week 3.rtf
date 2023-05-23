@@ -1,0 +1,50 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2577
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;\red0\green0\blue0;\red0\green0\blue233;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c93333;
+}
+\margl1440\margr1440\vieww18860\viewh20440\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 How can we speed up block propagation in the network and why is that important for decentralization?\
+
+\f1\b0 \
+\
+https://bitcoin.stackexchange.com/questions/56485/can-someone-please-explain-fibre-to-me-like-im-5-and-why-is-it-useful/56494#56494\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://github.com/bitcoinfibre/bitcoinfibre"}}{\fldrslt 
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 Fibre}}
+\f2 \cf3 \expnd0\expndtw0\kerning0
+ (Fast Internet Bitcoin Relay Engine) is a protocol which attempts to deliver Bitcoin blocks around the world with delays as close to the physical limits as possible.\
+This is very important because Bitcoin mining is intended to be a fair lottery: If you have x% of the hashrate you should find x% of the blocks, on average. But when it takes time to communicate blocks mining acts more like a race than a lottery: the bigger miner gets an unjust share, creating a pressure to centralize.\
+\
+https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki\
+\
+Compact blocks save bandwidth first.  And as a side effect reduces latency in significant ways.\
+\
+FIBRE imporves latency\
+\
+https://bitcoinmagazine.com/technical/on-relay-how-different-bitcoin-developers-are-speeding-up-the-network-part-1469724479\
+\
+Head first mining\
+\
+Flacon, fibre, fast relay network\
+https://bitcoinmagazine.com/technical/how-falcon-fibre-and-the-fast-relay-network-speed-up-bitcoin-block-propagation-part-1469808784\
+\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://stratumprotocol.org/blog/stratumv2-jn-announcement/"}}{\fldrslt \cf4 \expnd0\expndtw0\kerning0
+\ul \ulc4 \outl0\strokewidth0 \strokec4 https://stratumprotocol.org/blog/stratumv2-jn-announcement/}}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0  \
+\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://www.galaxy.com/research/insights/future-of-bitcoin-mining-protocols/"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://www.galaxy.com/research/insights/future-of-bitcoin-mining-protocols/}} \
+\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://bitcoin.stackexchange.com/questions/118059/is-fibre-still-in-use-in-2023"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://bitcoin.stackexchange.com/questions/118059/is-fibre-still-in-use-in-2023}} \
+\
+\pard\pardeftab720\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://dci.mit.edu/utreexo"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://dci.mit.edu/utreexo}} }

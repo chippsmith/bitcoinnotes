@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2577
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww19540\viewh22880\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 What are the differences in a full node, pruned node and SPV node??\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf0 Per mastering bitcoin chapter 8.
+\f0\b0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 All nodes validate and propagate transactions and blocks and discover and maintain peers.\
+\
+\ul Full nodes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \ulnone Per mastering bitcoin chapter 8.
+\f0\b0 \ul \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone -Maintain a complete and up to date copy of the blockchain\
+-Independently builds and verify blockchain starting with genesis block\
+-Can independently and authoritatively verify any transaction without recourse or reliance on any other source\
+-Relies on network to get information about new blocks\
+-Complete freedom and independence from central authority\
+-Most common way to run a full node is Bitcoin Core\
+\
+\ul SPV nodes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f1\b \cf0 \ulnone Per mastering bitcoin chapter 8.
+\f0\b0 \ul \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone -Simple Payment Verification node aka lightweight nodes\
+-Requests transactions from full nodes as needed\
+-Bloom filters improve privacy but privacy will still be much better with own full node\
+-Downloads only block headers not transactions and therefore is 1000 times smaller than full blockchain\
+-Does not keep full copy of blockchain\
+-Designed to run on space and power constrained devices like smartphones and tablets\
+-Verifys transactions by reference to their depth not their height\
+-Can prove a transaction exists but cannot prove a double spend utxo does not exist b/c it does not maintain a full copy of the utxo set\
+-Needs to randomly connect to several nodes to increase probability one is honest.  This is to protect against denial of service attacks and double spend attacks\
+-More vulnerable to network partitioning attacks and sybil attacks\
+-rely on Full nodes to relay transactions\
+\
+\ul Pruned nodes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone -Most common way to run is bitcoin core\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 -In order to run set the prune variable in the bitcoin.conf file equal to N where N is the number of megabytes of blocks you want to store.  -Minimum is 550 MB\
+-According to Peter Wuille there is no difference in security of a pruned node vs a full node.  The only difference is pruned node lack some features\
+-Pruned nodes cannot rescan old wallets for transaction history\
+-Pruned nodes can\'92t serve block to other peers\
+\
+\
+\
+Implementations(https://blog.lopp.net/2022-bitcoin-node-performance-tests/):\
+Bitcoin core:  most common,  Full or Pruned, No sPV\
+BCoin:  Full or SPV\
+Gocoin:  Full\
+BitcoinJ: Java library using SPV node\
+\
+Others that were not clear so I assume were only full:\
+Bitcoin Knots\
+btcd\
+Libbitcoin\
+\
+\
+\
+A full node verify all blocks and transactions and build a full database of utxos establishing the validity of the utxo by confirming it remains unspent\
+\
+SPV node  confirms the transaction was in a certain block using merle paths but waits until six block have passed since the block containing the transaction meaning other nodes accepted the block and did the necessary work to produce the block which is proof the tx was not double spent\
+\
+\
+High level differences:\
+\
+\ul Full Node:\ulnone   downloads all blocks and verify all transactions and blocks and keeps the blocks forever(also known as archival node)\
+\ul Pruned Node:\ulnone   also downloads all block and verify all transactions but does not keep all blocks forever, It prunes all but a certain storage capacity set by user\
+\ul SPV node:\ulnone   Downloads on the block headers and queries full nodes using bloom filters for transactions it is interested in.  SPV nodes use merkle trees and block depth to verify transactions are included in a block without storing the blocks themselves.\
+\
+\
+SPV nodes can verify tx has been confirmed by a certain amount of work and know what the most accumulated work chain is\
+\
+SPV nodes cannot determine whether the tx block of the tx chain is valid\
+SPV nodes cannot enforce consensus rules\
+SPV nodes cannot ensure preferred monetary policy schedule is being followed\
+SPV nodes cannot give you same level of privacy\
+\
+\
+\
+Further questions:\
+Why run any node?\
+Can lightning nodes be run on top of SPV and/or pruned nodes?\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Utreexo??\
+\
+\
+Conclusion\
+If you have the space and bandwidth and want to enforce consensus rules full node is the only way to go.  If you have storage constraints a pruned node is the next best thing with minor feature limitations.  If you need to run a node on a smartphone and/or only care about validating your transactions the tradeoffs offered by an SPV node can be considered.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+Syble attack\
+https://riptutorial.com/bitcoin/example/26000/node-configuration\
+\
+What mainly protects is POW\
+Social layer helps too\
+\
+Fair exchange problem:\
+\
+Auditable\
+Smart contracts are self executing\
+Terms are written into code directly\
+\
+Irreverisvility: unlocks micro payments\
+}

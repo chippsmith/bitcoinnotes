@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2577
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww13220\viewh18320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 I am trying to make sure my understanding of assumeutxo is correct before coming up with arguments for and against.\
+\
+This is my understanding.  Please add to and correct any mistake.  \
+\
+Assumeutxo allows new users of bitcoin core to use wallet functions before full chain download and validation has occurred.  It does this by placing a snapshot of the utxo set agreed upon by trusted devs that allows the software to quickly sync to the current utxo set and allows the user to send and receive transactions.  The hash of the serialized version of the utxo set is included in the source code.  The user can obtain the utxo snaphot from any source and check the hash against the source code.  The block headers are downloaded as usual and then IBD is done from the snapshot block to the current tip.\
+In the background block download and validation is done so that the snapshot can eventually be independently verified as being correct.\
+\
+The assumption is that we are trusting bitcoin core source code anyway so why no trust it with a snapshot of the utxo set to enable full node users to more quickly use the software wallet functions.  The snapshot can be very easily checked by a larger portion of user than would be able to read the C++ code updates on more complicated areas of bitcoin cores code.  A non technical user could download the software and wait for the blocks to be fully downloaded and verified, and make sure the snapshot was correct.  Again much easier than reading most pull requests.\
+\
+Assumeutxo is similar to assume valid.  Assume valid allows nodes to skip script validation for all but the most recent set of blocks.  The security model is if the hashes of the blocks are correct and the transactions were in the block then they do not need to be validated by new nodes.  If one wanted to trick a user into accepting fake coins they would have to get them to start with a bad -assume valid parameter, isolate their node from the honest network to prevent them from seeing the correct chain(eclipse attack?), and build a PoW valid chain that includes a block with an invalid coin assignment.  With assumeutxo all they have to do is get the user to accept a malicious assumeutxo commitment value.  Modifying and serializing a false utxo snapshot is easy.  To protect against this the assumeutxo commitment value is embedded in the source code.  The idea is that if the attacker can modify the source code used to build a binary they can do anything they want so it\'92s not that big a security risk.\
+\
+\
+\
+\
+\
+IBD taking anywhere from 4 hours to multiple days depending on hardware and network bandwidth discourages some users from running nodes so any way to speed up that process would theoretically increase the number of nodes on the network(we can use the same points from the block size debate as to why that\'92s important).}
