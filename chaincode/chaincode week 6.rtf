@@ -1,21 +1,27 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2577
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
-\f3\fmodern\fcharset0 Courier-Bold;\f4\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
-\margl1440\margr1440\vieww22280\viewh17700\viewkind0
+\f3\fswiss\fcharset0 Arial-BoldMT;\f4\fswiss\fcharset0 ArialMT;\f5\fmodern\fcharset0 Courier-Bold;
+\f6\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red236\green183\blue39;\red0\green0\blue233;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c94510\c76078\c19608;\cssrgb\c0\c0\c93333;
+}
+\margl1440\margr1440\vieww23780\viewh21200\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2019-April/016825.html\
 \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f1\b \ul Assumeutxo
+\f1\b \cf0 \ul \ulc0 Assumeutxo\
+\
+Jame obierne quote
 \f0\b0 \ulnone \
 \pard\pardeftab720\partightenfactor0
 
 \f2 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 # Security\
+# Security\
 \
 Obviously there are some security implications due consideration. While this\
 proposal is in the spirit of assumevalid, practical attacks may become\
@@ -43,11 +49,178 @@ Beyond this risk, I can't think of material differences in security\
 relative to\
 assumevalid, though I appeal to the list for help with this.\
 \
-
-\f3\b \ul BLOCKSIZE INCREASE\
 \
 \pard\pardeftab720\partightenfactor0
 
-\f4\b0 \cf2 \ulnone Andreas Antonopoulos: "With each one of these [block size] increases, fewer people can participate in the validation... Fewer people can participate in being independent actors. We go from a system that is decentralised, to a system that is more and more centralised."\
+\f3\b\fs34\fsmilli17333 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 The tradeoffs of AssumeUTXO are not worth it.\
 \
-https://www.reddit.com/r/Bitcoin/comments/77tg5t/andreas_antonopoulos_with_each_one_of_these_block/}
+\pard\pardeftab720\partightenfactor0
+
+\fs26\fsmilli13333 \cf2 First Afirmative (tradeoffs are NOT worth it)\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 We will never achieve the same security as downloading and verifying all transactions and creating the utxo set from scratch -C\
+\
+The proposal would introduce a new unprecidented idea of accepting UTXO data from a source other than peer nodes. With normal peer node selection great care is take to select a range of node IP addresses to mitigate various attack surfaces. This new approach bypasses that completely and takes UTXO data from alternate centralized sources. This is inconsistant with bitcoins peer to peer design and sets a bad precident. - D\
+\
+The benefit of this proposal is limited to the IBD process at the time that a node is being setup, there is no ongoing benefit realized with node operation after IBD. However the risk from exploiting code changes in an unexpected way is there for node operation going forward. -D\
+\
+The benefit of this proposal is very small. With $200 dollars worth of hardware I can download the blockchain in under 7 hours. In the meantime there are other options if I am in a hurry and need to send/recieve a transaction. -C\
+\
+The benefit of this proposal is very small. With $200 dollars worth of hardware I can download the blockchain in under 7 hours. In the meantime there are other options if I am in a hurry and need to send/recieve a transaction. -C\
+\
+The benefit of this proposal is very small. With $200 dollars worth of hardware I can download the blockchain in under 7 hours. In the meantime there are other options if I am in a hurry and need to send/recieve a transaction. -C\
+\
+New users downloading the snapshot from other sources could be downloading malicious software. -C\
+\
+New users downloading the snapshot from other sources could be downloading malicious software. -C
+\f2\fs24 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs26\fsmilli13333 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 First Negative (tradeoffs are worth it)\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 This alternate approach of using snapshot data is only a temporary measure and the full IBD validation process is completed in the background shortly thereafter. So we feel that the additional risk is mitigated and the benefit of new node users being able to quickly participate is the network is worth it.\
+\
+If one node runs assumeutxo the only risk is that user gets tricked in the intermediate time between downloading the snapshot to downloading the whole blockchain. This risk is reduced to almost nothing because the hash of the utxo set is included in the source code. If an attacker can control the source code its already game over for the victim. -C\
+\
+\
+According to Andrew Chow a major complaint the get from new users is how long it takes to sync the blockchain. In addition new users are often confused/impatient and give out addresses before the synce is done and dont understand why the transaction is not showing up. -C\
+\
+We need to design the software so uneducated users have a good experience and that means being able to use the software without having to wait hours and days. This results in a decrease in unnecessary complaints and support tickets. -C\
+\
+We need to design the software so uneducated users have a good experience and that means being able to use the software without having to wait hours and days. This results in a decrease in unnecessary complaints and support tickets. -C\
+\
+This is an optional feature. If you dont want to use it you dont have to. -C\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b \cf2 Second Afirmative\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 Generally speaking as bitcoiners we talk about having a low time preference. Its hard to me to imagine a scenario where I spent enought time learning about bitcoin to want to run my own node but couldnt wait another day to transact. -C\
+\
+Phases 2 and 3 are not clearly defined\
+\
+Risk from code changes being exploited in unexpected ways is also there for users that are not using this feature.-D \
+\
+The phase 2 question of how snapshots will be available from peers for a new assumeutxo value that has just been released does not currently have a solution \
+\
+We can achieve the same result by commiting to utxo in the blocks header, which is far better solition due to it's decentralised nature.\
+\
+assumeValid doesn't require a seporate download of the dataset. It involves skipping signature validation on historical transactions where each transaction is linked to the merkle root in the bock header secured by POW. AssumeUTXO seems like a much bigger compromise because the entire UTXO set is only secured by a single hash in the code base repository which is verified by individuals.
+\f2\fs24 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs26\fsmilli13333 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 Second Negative\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 Per our arguments against blocksize increase the more nodes the better. And anything we can do to make the bitcoincore setup easier will help more people run nodes. -C\
+\
+The blockchain will continue to grow forever so we will need a solution like this eventually. -C
+\f2\fs24 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b\fs34 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 Given the advancements in hardware since 2009, it does make sense to expand the block size (beyond the limits of SegWit).
+\f5\fs24 \expnd0\expndtw0\kerning0
+\ul \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \ulc2 \
+\pard\pardeftab720\partightenfactor0
+
+\f6\b0 \cf2 \ulnone Andreas Antonopoulos: "With each one of these [block size] increases, fewer people can participate in the validation... Fewer people can participate in being independent actors. We go from a system that is decentralised, to a system that is more and more centralised."\
+\
+https://www.reddit.com/r/Bitcoin/comments/77tg5t/andreas_antonopoulos_with_each_one_of_these_block/\
+\
+First affirmative:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\fs26\fsmilli13333 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 It is clear that the current block size will not accomodate global scale transacting in bitcoin. We concede that increased block size alone will also not provide the scale that is needed. Our premise is that increased block size in addition to other layers such as lightning etc is required to scale bitcoin. \
+\
+Bigger blocks will alow lower fees to facilitate adoption of users transacting in Bitcoin which is the single most important thing to the success of bitcoin\
+\
+First negative:\
+\
+We agree that additional layers are required to scale bitcoin. But increasing the block size now in anticipation of a potential future need would take bitcoin in a negative direction. We should only consider the possibility of a block size increase when it is clear that is is required for a specific scaling solution, and when it is clear what specific size the increase should be. The debate question specifically applies to hardware advancements that have happened since 2009 until now, so this is not a question of what may be required in the future. Therefore we maintain that a block size increase should not be considered at this time.\
+\
+(additional argument: block propagation)\
+While we have seen advancements in hardware since 2009, network bandwidth still poses a serious challenge for a global peer to peer network. It's clear that increased block size would have the following impacts: \
+reduced global consensus\
+increased occurances of orphgan blocks\
+increased risk surface\
+\
+I think we should center our argument against block size increase now around the negative effects on node decentralization it would have. Namely, bigger blocks would take up more disk space, take more computing power to validate, and take up more bandwidth when propagated throughout the network. All theses things end up making it less likely individuals will run a node. If full node count drops low because its "easier"/"cheaper" to use other options, then attacking bitcoins core principals becomes much easier. -C\
+\
+Bitcoins core properties are open, neutral, censorship resistant, 21 mil cap, hard to confiscate. All these are weakened if not enough people run their own nodes to enforce the rules they find important. -C\
+\
+There is work being done allowing mobile users to run a full node which opens the door to many more node runners. Increases the blocksize would be hugely detrimental to these projects. -C\
+\
+People will be willing to pay higher fees for important transactions. This would actuallty help filter out spam. Increased block size would only temporarally allow lower fees. Ultimately if bicoin is widely used then we will have high fees even if we have bigger blocks.\
+\
+(additional argument)\
+Second layer solutions like the lightng network will allow even lower fee transactions, and much faster settlement at the same time \
+\
+(additional argument)\
+lower fees are a disincentifve for Miners which will result in less investment in mining and ultimately less network security \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b \cf2 Second Afirmative\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 It would take years to build consensus around a block size increase and to implement, test, and deploy the upgrade. It's obvious that more blockspace will be needed for any solution that will scale bitcoin to the global level. We do need to anticipate future needs and be ready with additional blockspace when it is required or global scale adoption may never happen.\
+\
+the importance of a transaction is a subjective idea, ordinals for example where not considered important by many people but we can see that they have contributed to the adoption of bitcoin\
+\
+current block size will not support opening and closing of channels for wide adoption. Bigger blocks are needed for the lightning netowrk.\
+\
+with rapid adoption due to low fees, the price of bitcoin will increase and foster more investment in mining\
+\
+Lower fees won't make any difference for the miners - they would just include more transactions in the block (for example fee will go down by half, but twice as many transacitons could be included, so it doesn't have any impact) -R\
+\
+adoption in the short term is more critical to the success of bitcoin than the longer term goal of higher security\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b \cf2 Second Negative\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b0 \cf2 It is currently not clear that a block size increase will be required, nor how much of a blockspace increase would be needed if it were required. Taproot, Channel agregation, etc hold a lot of potential, also other currently unknown solutions are possible. It is equally possible that a blockspace increase now would take bitcoin in a negative direction by artificially signaling that blockspace is cheap when it really should be highy valued. We should not pretend to know what future innovations are possible and potentially hinder adoption of bitcoin, Therefore we should not expand the block size.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf3 \strokec3 A major change to the protocol requires a hard fork and anytime you have a non backwards compatible change you risk a network split or worse a \
+catastrophic consensus failure. -C {\field{\*\fldinst{HYPERLINK "https://en.bitcoin.it/wiki/Block_size_limit_controversy#cite_note-5"}}{\fldrslt \cf4 \ul \ulc4 \strokec4 https://en.bitcoin.it/wiki/Block_size_limit_controversy#cite_note-5}}\cf4 \ul \ulc4 \strokec4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \ulnone \strokec2 Bigger blocks lead to slower block propagation times which leads to mining centralization -C\
+\
+blockspace is a limited resource and all use cases including ordinals must compete for space. having bigger blocks will not change this dynamic.\
+\
+very large blocks are still not enough, other scaling solutions are required. The lighting nework is only part of the solution. \
+(Fedimits. liquid, channel aggregation)\
+\
+Concise conclusion: Bigger blocks lead to fewer nodes which hurts decentrilzation and makes attacking bitcoins core values easier. We should weigh every possible benefit agianst these downsides. It doesnt matter how much we scale, or how many new users we get, or how many transactions per second we get or how much NGU if we lose the open, decentralized nature of the bitcoin network -C}
